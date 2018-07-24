@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
+  <script src="http://formbuilder.online/assets/js/form-builder.min.js"></script>    <script src="https://formbuilder.online/assets/js/form-render.min.js"></script>
+  <script src="https://formbuilder.online/assets/js/form-render.min.js"></script>
+
+  <title>Document</title>
+</head>
+<body>
+<form id="fb-render"></form>
+</body>
+
+<script type="text/javascript">
+jQuery(function($) {
+  var fbRender = document.getElementById('fb-render'),
+    formData = '<form-template><fields><field class="form-control" label="Full Name" name="text-input-1459436848806" type="text" subtype="text"></field><field class="form-control" label="Select" name="select-1459436851691" type="select"><option value="option-1">Option 1</option><option value="option-2">Option 2</option></field><field class="form-control" label="Your Message" name="textarea-1459436854560" type="textarea"></field></fields></form-template>';
+
+  var formRenderOpts = {
+    formData,
+    dataType: 'xml'
+  };
+
+  $(fbRender).formRender(formRenderOpts);
+});
+</script>
+</html>

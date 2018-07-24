@@ -1,0 +1,12 @@
+.program {
+  height: 300px;
+  width: 100%;
+}
+.img {
+  height: 300px;
+  width: 20%;
+}
+.proinfo {
+  float: right;
+  width: 75%;
+}

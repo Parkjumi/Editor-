@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
+  <script src="http://formbuilder.online/assets/js/form-builder.min.js"></script>
+  <title>Document</title>
+</head>
+<body>
+  <script type="text/javascript">
+    jQuery(function($) {
+      // $(document.getElementById('build-wrap')).formBuilder();
+      $('div.form-actions.btn-group').remove();
+
+      var fbEditor = document.getElementById('build-wrap');
+      var formData = JSON.stringify([{"type":"text", "label":"Text Input"}]);
+      var options = {
+        showActionButtons: false,
+        formData : formData,
+        disableFields: [
+          'button',
+          'header',
+          'textarea',
+          'select',
+          'number',
+          'checkbox-group',
+          'radio-group',
+          'hidden',
+          'text',
+          'autocomplete',
+          'file',
+          'date',
+          'paragraph'
+        ],
+        disabledActionButtons: ['data','clear','save']
+      };
+      $(fbEditor).formBuilder(options);
+    });
+  </script>
+  <div id="build-wrap"></div>
+</body>
+</html>

@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>gramApply</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Custom styles for this template -->
+    <link href="css/3-col-portfolio.css" rel="stylesheet">
+
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script src="./jquery-ui-1.12.1/datepicker-ko.js"></script>
+    <script type="text/javascript" src="./ks/jquery-3.1.0.min.js" charset="utf-8"></script>
+  </head>
+
+  <body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+      <div class="container">
+        <a class="navbar-brand" href="main">gramApply</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+          <ul class="navbar-nav ml-auto">
+              <% if(user) {%>
+                <li class="nav-item active">
+                  <h5 style="color:white; margin-top:4px;"><%=user.name%>님</h5>
+                </li>
+                <li class="nav-item active">
+                  <a class="nav-link" href="/logout">로그아웃</a>
+                </li>
+                <% if(user.code==='st') {%>
+                <li class="nav-item">
+                  <a class="nav-link" href="prolist">프로그램 목록</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="mypage">마이페이지</a>
+                </li>
+              <%}else{%>
+                <li class="nav-item">
+                  <a class="nav-link" href="proinsert">프로그램 등록</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="promanage">프로그램 관리</a>
+                </li>
+                <% } %>
+                <%}else{%>
+                <li class="nav-item active">
+                  <a class="nav-link" href="login">로그인</a>
+                </li>
+                <li class="nav-item active">
+                  <a class="nav-link" href="signup.html">회원가입</a>
+                </li>
+              <% } %>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Page Content -->
+    <div class="container">
+      <% if(apply) {%>
+          <!-- Page Heading -->
+          <h2 class="my-4">내가 신청한 프로그램</h2>
+          <div class="row">
+            <% apply.forEach(function(data,index){ %>
+            <div class="col-lg-4 col-sm-6 portfolio-item">
+              <div class="card h-100" style="width:250px;height:300px;">
+                <img class="card-img-top" src="<%=data.p_poster%>" alt="">
+                <div class="card-body">
+                  <center><h4 class="card-title">
+                    <a href="/pro_detail?p_code=<%=data.p_code%>"><%=data.p_name%></a>
+                  </h4><center>
+                  <p class="card-text"><%=data.p_start%>~<%=data.p_end%></p>
+                  <h6 class="card-text">프로그램 신청 마감 일자</h6>
+                  <p><%=data.p_applyend%></p>
+                </div>
+              </div>
+            </div>
+            <% }); %>
+          </div>
+          <!-- /.row -->
+        <%}else{%>
+          <!-- Page Heading -->
+          <h2 class="my-4">현재 진행중인 프로그램</h2>
+
+          <div class="row">
+            <% rows.forEach(function(data,index){ %>
+            <div class="col-lg-4 col-sm-6 portfolio-item">
+              <div class="card h-100" style="width:250px;height:300px;">
+                <img class="card-img-top" src="<%=data.p_poster%>" alt="">
+                <div class="card-body">
+                  <center><h4 class="card-title">
+                    <a href="/pro_detail?p_code=<%=data.p_code%>"><%=data.p_name%></a>
+                  </h4><center>
+                  <p class="card-text"><%=data.p_start%>~<%=data.p_end%></p>
+                  <h6 class="card-text">프로그램 신청 마감 일자</h6>
+                  <p><%=data.p_applyend%></p>
+                </div>
+              </div>
+            </div>
+            <% }); %>
+          </div>
+          <!-- /.row -->
+      <%}%>
+
+      <!-- Pagination -->
+      <ul class="pagination justify-content-center">
+        <li class="page-item">
+          <a class="page-link" href="#" aria-label="Previous">
+            <span aria-hidden="true">&laquo;</span>
+            <span class="sr-only">Previous</span>
+          </a>
+        </li>
+        <li class="page-item">
+          <a class="page-link" href="#">1</a>
+        </li>
+        <li class="page-item">
+          <a class="page-link" href="#">2</a>
+        </li>
+        <li class="page-item">
+          <a class="page-link" href="#">3</a>
+        </li>
+        <li class="page-item">
+          <a class="page-link" href="#" aria-label="Next">
+            <span aria-hidden="true">&raquo;</span>
+            <span class="sr-only">Next</span>
+          </a>
+        </li>
+      </ul>
+
+    </div>
+    <!-- /.container -->
+
+    <!-- Footer -->
+    <footer class="py-5 bg-dark">
+      <div class="container">
+        <p class="m-0 text-center text-white">Copyright &copy; Your Website 2017</p>
+      </div>
+      <!-- /.container -->
+    </footer>
+
+    <!-- Bootstrap core JavaScript -->
+    <script src="vendor/jquery/jquery.min.js"></script>
+    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+  </body>
+
+</html>

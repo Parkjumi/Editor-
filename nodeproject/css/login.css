@@ -1,0 +1,19 @@
+.btn {
+    background-color: white;
+    color: black;
+    width: 400px;
+    border: 2px solid #343a40;
+}
+
+.input {
+    border: none;
+    height: 40px;
+    width: 400px;
+    border-bottom: 2px solid #343a40;
+}
+
+.form {
+
+  text-align: left;
+  margin: 20px;
+}

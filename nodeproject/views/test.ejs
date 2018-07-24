@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+  <script src="./jquery-ui-1.12.1/datepicker-ko.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
+  <script src="http://formbuilder.online/assets/js/form-builder.min.js"></script>
+  <script src="https://formbuilder.online/assets/js/form-render.min.js"></script>
+</head>
+<body>
+Check the console
+</body>
+
+
+<script type="text/javascript">
+  jQuery(function() {
+    var formData = '<form-template><fields><field class="form-control" label="Full Name" name="text-input-1459436848806" type="text" subtype="text"></field><field class="form-control" label="Select" name="select-1459436851691" type="select"><option value="option-1">Option 1</option><option value="option-2">Option 2</option></field><field class="form-control" label="Your Message" name="textarea-1459436854560" type="textarea"></field></fields></form-template>',
+      formRenderOpts = {
+        dataType: 'xml',
+        formData: formData
+      };
+
+    var renderedForm = $('<div>');
+    renderedForm.formRender(formRenderOpts);
+
+    console.log(renderedForm.html());
+  });
+</script>
+</html>

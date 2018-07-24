@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <title>gramApply</title>
+
+  <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+  <script src="./jquery-ui-1.12.1/datepicker-ko.js"></script>
+  <script type="text/javascript" src="./ks/jquery-3.1.0.min.js" charset="utf-8"></script>
+  <!-- Bootstrap core CSS -->
+  <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- Custom styles for this template -->
+  <link href="css/3-col-portfolio.css" rel="stylesheet">
+  <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+
+  <style type="text/css">
+    .img_wrap {
+      float: right;
+      width: 40%;
+    }
+    .img_wrap img{
+      height: 300px;
+    }
+    .frame {
+      width: 100%;
+      height: 300px;
+    }
+    .form {
+      width: 100%;
+    }
+    #descript {
+      width: 60%;
+      height: 200px;
+    }
+    .insert {
+      float: right;
+    }
+  </style>
+
+</head>
+  <body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+      <div class="container">
+        <a class="navbar-brand" href="main">gramApply</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+          <ul class="navbar-nav ml-auto">
+            <% if(user) {%>
+              <li class="nav-item active">
+                <h5 style="color:white; margin-top:4px;"><%=user.name%>님</h5>
+              </li>
+              <li class="nav-item active">
+                <a class="nav-link" href="/logout">로그아웃</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="proinsert">프로그램 등록</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="promanage">프로그램 관리</a>
+              </li>
+              <%}else{%>
+              <li class="nav-item active">
+                <a class="nav-link" href="login">로그인</a>
+              </li>
+              <li class="nav-item active">
+                <a class="nav-link" href="signup.html">회원가입</a>
+              </li>
+            <% } %>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <div class="container">
+      <h2 class="my-4">신청서 양식 등록</h2>
+      <h2 id="title" class="my-4"><%=rows[0].p_name%></h2>
+      <div id="build-wrap"></div>
+    </div>
+  </body>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
+  <script src="http://formbuilder.online/assets/js/form-builder.min.js"></script>
+
+  <script type="text/javascript">
+    var title = $("#title").html();
+
+    jQuery(function($) {
+      var fbEditor = document.getElementById('build-wrap');
+      var formBuilder = $(fbEditor).formBuilder();
+
+      $(document).on('click', '.save-template', function(){
+        var data = formBuilder.actions.getData('xml');
+        var json = formBuilder.actions.getData('json');
+        console.log(title);
+        $.ajax({
+          type:"post",
+          url:"/editor/insert",
+          data:{
+            data:data,
+            json:json,
+            title:title
+          },
+          success: function (response) {
+            console.log(response.result);
+            if(response.result == "들어감"){
+              location.href = "/main";
+            }else{
+              alert('실패');
+            }
+          }
+        })
+      });
+    });
+  </script>
+</html>

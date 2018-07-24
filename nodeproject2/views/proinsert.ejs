@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <title>gramApply</title>
+
+  <!-- Bootstrap core CSS -->
+  <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- Custom styles for this template -->
+  <link href="css/3-col-portfolio.css" rel="stylesheet">
+  <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+
+  <style type="text/css">
+    .img_wrap {
+      float: right;
+      width: 40%;
+    }
+    .img_wrap img{
+      height: 300px;
+    }
+    .frame {
+      width: 100%;
+      height: 300px;
+    }
+    .form {
+      width: 100%;
+    }
+    #descript {
+      width: 60%;
+      height: 200px;
+    }
+    .insert {
+      float: right;
+    }
+  </style>
+
+  <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+  <script src="./jquery-ui-1.12.1/datepicker-ko.js"></script>
+  <script type="text/javascript" src="./ks/jquery-3.1.0.min.js" charset="utf-8"></script>
+  <script type="text/javascript">
+  $(function(){
+    $("#date2").datepicker({
+        showOn: "both",
+        buttonImage: "calendar.png",
+        buttonImageOnly: true,
+        buttonText: "Select date"
+      });
+      $("#date3").datepicker({
+          showOn: "both",
+          buttonImage: "calendar.png",
+          buttonImageOnly: true,
+          buttonText: "Select date"
+        });
+    });
+
+    var sel_file;
+
+        $(document).ready(function() {
+            $("#input_img").on("change", handleFileFileSelect);
+        });
+
+        function handleFileFileSelect(e) {
+
+          var files = e.target.files;
+          var filesArr = Array.prototype.slice.call(files);
+
+          filesArr.forEach(function(f) {
+            if(!f.type.match("image.*")) {
+              alert("확장자는 이미지 확장자만 가능합니다.");
+              return;
+            }
+
+            sel_file = f;
+
+            var reader = new FileReader();
+            reader.onload = function(e) {
+              $("#img").attr("src", e.target.result);
+            }
+            reader.readAsDataURL(f);
+          });
+      }
+  </script>
+  <!-- datepicker 날짜 선택, var sel_file 이미지 파일 첨부 -->
+
+</head>
+  <body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+      <div class="container">
+        <a class="navbar-brand" href="main">gramApply</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+          <ul class="navbar-nav ml-auto">
+            <% if(user) {%>
+              <li class="nav-item active">
+                <h5 style="color:white; margin-top:4px;"><%=user.name%>님</h5>
+              </li>
+              <li class="nav-item active">
+                <a class="nav-link" href="/logout">로그아웃</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="proinsert">프로그램 등록</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="promanage">프로그램 관리</a>
+              </li>
+              <%}else{%>
+              <li class="nav-item active">
+                <a class="nav-link" href="login">로그인</a>
+              </li>
+              <li class="nav-item active">
+                <a class="nav-link" href="signup.html">회원가입</a>
+              </li>
+            <% } %>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <div class="container">
+      <h2 class="my-4">프로그램 등록</h2>
+
+      <div class="frame">
+          <form class="form" method="post" action="/upload" enctype="multipart/form-data">
+            <div class="img_wrap">
+              <img id ="img" /></br>
+              <input type="file" id="input_img" name="upload_file"/>
+            </div>
+              <div class="form">
+              <ul class="navbar-nav ml-auto">
+                <li class="nav-item active">
+                  제목 <input class="input" type="text" name="p_name"> </a>
+                </li>
+                <li class="nav-item">
+                  카테고리 <select name="p_category">
+                  <option value="특강">특강</option>
+                  <option value="공모전/경진대회">공모전/경진대회</option>
+                  <option value="해외연수">해외연수</option>
+                  <option value="기타">기타</option>
+                  </select>
+                  기간 <input type="text" name="p_start" id="date2" size="15" />
+                  ~ <input type="text" name="p_end" id="date3" size="15" />
+                  </br>
+                </li>
+                </ul>
+                  내용 </br>
+                  <input id="descript" type="textarea" name="p_contents"></br></br>
+                 </div>
+                  <button class="btn" type="submit" value="upload" name="submit">프로그램 등록</button>
+            </form>
+        </div>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,16 @@
+.input {
+    border: none;
+    height: 40px;
+    width: 500px;
+    border-bottom: 2px solid #343a40;
+}
+.btn {
+    background-color: white;
+    color: dark;
+    width: 80px;
+    border: 2px solid #343a40;
+}
+
+#form {
+  margin:  30px;
+}

@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>gramApply</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="css/3-col-portfolio.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/stumanage.css">
+
+  </head>
+  <body>
+<!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+      <div class="container">
+        <a class="navbar-brand" href="main">gramApply</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+          <ul class="navbar-nav ml-auto">
+              <li class="nav-item active">
+                <h5 style="color:white; margin-top:4px;"><%=user.name%>님</h5>
+              </li>
+              <li class="nav-item active">
+                <a class="nav-link" href="/logout">로그아웃</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="proinsert">프로그램 등록</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="promanage">프로그램 관리</a>
+              </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Page Content -->
+      <div class="container">
+        <h2 class="my-4">2017 창의아이디어 2차</h2>
+
+        <div class="program">
+          <img class="img" src="images/2017창의아이디어2차.png">
+          <div class="proinfo">
+            <p>카테고리 :</p>
+            <p>수행기간 :</p>
+            <p>신청인원 :</p>
+          </div>
+        </div>
+
+        <div class="prolist">
+          <table border="1" width="1200" >
+            <tr height="40" width="200">
+              <td>번호</td>
+              <td>학번</td>
+              <td>이름</td>
+              <td>예치금</td>
+              <td>파일제출</td>
+            </tr>
+              <tr height="30">
+                <td></td>
+                <td></td>
+                <td></td>
+                <td><input type="checkbox" name="chk_info"></td>
+                <td><input type="checkbox" name="chk_info"></td>
+              </tr>
+          </table>
+        </div>
+
+  </body>
+</html>

@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>gramApply</title>
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script src="./jquery-ui-1.12.1/datepicker-ko.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
+    <script src="http://formbuilder.online/assets/js/form-builder.min.js"></script>
+    <script src="https://formbuilder.online/assets/js/form-render.min.js"></script>
+
+    <!-- Bootstrap core CSS -->
+    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="css/3-col-portfolio.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/stumanage.css">
+
+  </head>
+  <body>
+<!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+      <div class="container">
+        <a class="navbar-brand" href="main">gramApply</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+          <ul class="navbar-nav ml-auto">
+            <% if(user) {%>
+              <li class="nav-item active">
+                <h5 style="color:white; margin-top:4px;"><%=user.name%>님</h5>
+              </li>
+              <li class="nav-item active">
+                <a class="nav-link" href="/logout">로그아웃</a>
+              </li>
+              <% if(user.code==='st') {%>
+              <li class="nav-item">
+                <a class="nav-link" href="prolist">프로그램 목록</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="mypage">마이페이지</a>
+              </li>
+            <%}else{%>
+              <li class="nav-item">
+                <a class="nav-link" href="proinsert">프로그램 등록</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="promanage">프로그램 관리</a>
+              </li>
+              <% } %>
+              <%}else{%>
+              <li class="nav-item active">
+                <a class="nav-link" href="login">로그인</a>
+              </li>
+              <li class="nav-item active">
+                <a class="nav-link" href="signup.html">회원가입</a>
+              </li>
+            <% } %>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Page Content -->
+      <div class="container">
+  <% rows.forEach(function(data){ %>
+        <h2 class="my-4"><%=data.p_name%></h2>
+        <div class="program">
+          <img class="img" src="<%=data.p_poster%>" style="width:230px;height:280px;">
+          <div class="proinfo">
+            <p>카테고리 :<%=data.p_category%></p>
+            <p>수행기간 :<%=data.p_start%>~<%=data.p_end%></p>
+            <p>신청 마감 일자 :<%=data.p_applyend%></p>
+            <p>신청인원 :</p>
+            <div style="border: 1px solid blue; width:500px;">
+              <%=data.p_contents%>
+            </div>
+            <button class="btn" type="button" onclick="location.href='program_apply?p_code=<%=data.p_name%>'+'&'+'s_num=<%=data.s_num%>'">신청서 제출</button>
+          </div>
+
+        </div>
+        <form style="border:1px solid" id='fb-render' method="get" action="/editor/setdata:<%=data.p_code%>"></form>
+        <script type="text/javascript">
+          jQuery(function($) {
+            var formRenderOpts = {
+              formData: '',
+              dataType: 'xml',
+              showActionButtons: true
+            };
+
+            function getData(){
+              $.ajax({
+                url: '/getData:' + $('.my-4').html()
+              }).done(function(data){
+                console.log(data[0].p_form);
+                formRenderOpts.formData = data[0].p_form;
+                var fbRender = document.getElementById('fb-render');
+                $(fbRender).formRender(formRenderOpts);
+              })
+            };
+            getData();
+          });
+        </script>
+  <% }); %>
+  </body>
+
+  <!-- <script type="text/javascript">
+    jQuery(function($) {
+      var fbEditor = document.getElementById('build-wrap');
+      var formBuilder = $(fbEditor).formBuilder();
+      var test = $('#p_name').val();
+
+      function getData(){
+        $.ajax({
+          url: '/dataUpdate:' + $('#p_name').val()
+        }).done(function(data){
+          console.log(data[0].p_form_json);
+          var formData = data[0].p_form_json;
+          document.getElementById('setData').addEventListener('click', function() {
+            formBuilder.actions.setData(formData);
+          });
+        });
+      };
+      getData();
+      });
+  </script> -->
+</html>
